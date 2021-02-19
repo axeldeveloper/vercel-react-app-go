@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -32,7 +31,7 @@ function App() {
           target="_blank"
           rel="noreferrer noopener"
         >
-          This project
+          This project use golang 1.12
         </a>{' '}
         was bootstrapped with{' '}
         <a href="https://facebook.github.io/create-react-app/">
