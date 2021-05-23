@@ -1,5 +1,7 @@
 package person
 
+// https://github.com/hiranya911/firecloud/blob/master/review-scorer/scorer/scorer.go
+// https://medium.com/google-cloud/firebase-developing-serverless-functions-in-go-963cb011265d
 import (
 	"encoding/json"
 	"fmt"
@@ -11,7 +13,7 @@ type Persona struct {
 	Age  int
 }
 
-func Person(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	// Declare a new Person struct.
 	var p Persona
 

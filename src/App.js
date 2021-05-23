@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
+
 function App() {
   const [date, setDate] = useState(null);
   useEffect(() => {
@@ -13,7 +14,7 @@ function App() {
   }, []);
   return (
     <main>
-      <h1>Create React App + Go API</h1>
+      <h1>Vercel React App + Go API</h1>
       <h2>
         Deployed with{' '}
         <a
