@@ -1,10 +1,5 @@
-
-import React, { useState, useEffect } from "react";
-//import Routes from "../routes/Index";
-
-//export default props => <>{Routes}</>;
+import React, { useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Home from "./Home";
