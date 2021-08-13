@@ -22,8 +22,8 @@ const CustomerLists = (props) => {
           {props.customers.length > 0 ? (
             props.customers.map((item) => (
               <tr key={item.id}>
-                <td>{item.nome}</td>
-                <td>{item.cpf}</td>
+                <td>{item.name}</td>
+                <td>{item.cnpj_cpf}</td>
                 <td className = "danger" colSpan="2">
                   <Button variant="primary mr-2" onClick={() => setValues(item)}>
                     <span className="fa fa-edit"></span>

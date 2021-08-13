@@ -26,17 +26,17 @@ const Customer = () => {
 
   const [fields, handleFieldChange] = useFormFields({
     id: 0,
-    nome: "",
-    cpf: "",
-    nascimento: "",
-    celular: "",
-    endereco: "",
-    bairro: "",
-    numero: "",
-    cep: "",
-    email: "",
+    name: "",
+    user_id: 1,
+    birth_date: "",
+    blocked: false,
+    cell_phone: "",
+    cnpj_cpf: "",
     estabelecimento_id: 1,
-    user_id: 1
+    ie_rg: "",
+    im: "",
+    suframa: "",
+    tax_regime:""
   });
 
   useEffect(() => { loadData() }, []);
@@ -47,16 +47,18 @@ const Customer = () => {
   }
 
   const cancelSubmit = () => {
+    fields.name = "";
+    fields.user_id = 1;
+    fields.birth_date= "";
+    fields.blocked =false;
+    fields.cell_phone= "";
+    fields.cnpj_cpf = "";
+    fields.estabelecimento_id = 1;
+    fields.ie_rg= "";
+    fields.im="";
+    fields.suframa= "";
+    fields.tax_regime ="";
     //fields.id = 0;
-    fields.nome = "";
-    fields.cpf = "";
-    fields.nascimento = "";
-    fields.celular = "";
-    fields.endereco = "";
-    fields.bairro = "";
-    fields.numero = "";
-    fields.cep = "";
-    fields.email = "";
     //fields.estabelecimento_id = 0;
     //fields.user_id = 0;
     setTitleModal("");
@@ -149,15 +151,15 @@ const Customer = () => {
 
   const formEdit = (item) => {
     fields.id = item.id;
-    fields.nome = item.nome;
-    fields.cpf = item.cpf;
-    fields.nascimento = item.nascimento;
-    fields.celular = item.celular;
-    fields.endereco = item.endereco;
-    fields.bairro = item.bairro;
-    fields.numero = item.numero;
-    fields.cep = item.cep;
-    fields.email = item.email;
+    fields.name = item.name;
+    fields.cnpj_cpf = item.cnpj_cpf;
+    fields.birth_date = item.birth_date;
+    fields.ie_rg = item.ie_rg;
+    fields.im = item.im;
+    fields.suframa = item.suframa;
+    fields.tax_regime = item.tax_regime;
+    fields.cell_phone = item.cell_phone;
+    fields.blocked = item.blocked;
     fields.estabelecimento_id = 1;
     fields.user_id = 1;
     setTitleModal("Edit Customer");
@@ -223,95 +225,97 @@ const Customer = () => {
           <Modal.Body>
             <Form id="formCustomer" onSubmit={handleSubmit}>
               <Form.Row>
-                <Form.Group as={Col} controlId="nome">
-                  <Form.Label>Name</Form.Label>
+                <Form.Group as={Col} controlId="ie_rg">
+                  <Form.Label>IE/RG</Form.Label>
                   <Form.Control type="text"
-                    name="nome"
-                    placeholder="Enter Name"
-                    value={fields.nome}
+                    name="ie_rg"
+                    placeholder="Enter ie/rg"
+                    value={fields.ie_rg}
                     onChange={handleFieldChange} />
                 </Form.Group>
-                <Form.Group as={Col} controlId="cpf">
+                <Form.Group as={Col} controlId="cnpj_cpf">
                   <Form.Label>CPF</Form.Label>
                   <Form.Control
                     type="text"
-                    name="cpf"
-                    placeholder="Enter price"
-                    value={fields.cpf}
+                    name="cnpj_cpf"
+                    placeholder="Enter cnpj/cpf"
+                    value={fields.cnpj_cpf}
                     onChange={handleFieldChange} />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
-                <Form.Group as={Col} controlId="nascimento">
-                  <Form.Label>Nascimento</Form.Label>
-                  <Form.Control type="text"
-                    name="nascimento"
-                    placeholder="Enter nascimento"
-                    value={fields.nascimento}
-                    onChange={handleFieldChange} />
-                </Form.Group>
-                <Form.Group as={Col} controlId="celular">
+                <Form.Group as={Col} controlId="cell_phone">
                   <Form.Label>Celular</Form.Label>
                   <Form.Control
                     type="text"
-                    name="celular"
+                    name="cell_phone"
                     placeholder="Enter celular"
-                    value={fields.celular}
+                    value={fields.cell_phone}
                     onChange={handleFieldChange} />
                 </Form.Group>
+                <Form.Group as={Col} controlId="im">
+                  <Form.Label>IM</Form.Label>
+                  <Form.Control type="text"
+                    name="im"
+                    placeholder="Enter im"
+                    value={fields.im}
+                    onChange={handleFieldChange} />
+                </Form.Group>      
               </Form.Row>
+
               <Form.Row>
-                <Form.Group as={Col} controlId="endereco">
-                  <Form.Label>Endereço</Form.Label>
+                <Form.Group as={Col} controlId="tax_regime">
+                  <Form.Label>Regime</Form.Label>
                   <Form.Control
                     type="text"
-                    name="endereco"
-                    placeholder="Enter endereco"
-                    value={fields.endereco}
+                    name="tax_regime"
+                    placeholder="Enter regime"
+                    value={fields.tax_regime}
                     onChange={handleFieldChange} />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
-                <Form.Group as={Col} controlId="bairro">
-                  <Form.Label>Bairro</Form.Label>
+                <Form.Group as={Col} controlId="name">
+                  <Form.Label>Nome</Form.Label>
                   <Form.Control
                     type="text"
-                    name="bairro"
-                    placeholder="Enter bairro"
-                    value={fields.bairro}
+                    name="name"
+                    placeholder="Enter name"
+                    value={fields.name}
                     onChange={handleFieldChange} />
                 </Form.Group>
               </Form.Row>
+              
               <Form.Row>
-                <Form.Group as={Col} controlId="numero">
-                  <Form.Label>Número</Form.Label>
+                <Form.Group as={Col} controlId="birth_date">
+                  <Form.Label>Nascimento</Form.Label>
                   <Form.Control type="text"
-                    name="numero"
-                    placeholder="Enter numero"
-                    value={fields.numero}
+                    name="birth_date"
+                    placeholder="Enter Nascimento"
+                    value={fields.birth_date}
                     onChange={handleFieldChange} />
                 </Form.Group>
-                <Form.Group as={Col} controlId="cep">
-                  <Form.Label>Cep</Form.Label>
+                <Form.Group as={Col} controlId="suframa">
+                  <Form.Label>Suframa</Form.Label>
                   <Form.Control type="text"
-                    name="cep"
-                    placeholder="Enter cep"
-                    value={fields.cep}
+                    name="suframa"
+                    placeholder="Enter suframa"
+                    value={fields.suframa}
                     onChange={handleFieldChange} />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>           
-              <Form.Group as={Col} controlId="email">
-                <Form.Label>E-mail</Form.Label>
-                <Form.Control type="text"
-                  name="email"
-                  placeholder="Enter email"
-                  value={fields.email}
-                  onChange={handleFieldChange} />
-              </Form.Group>
+                <Form.Group as={Col} controlId="blocked">
+                  <Form.Label>Ativo</Form.Label>
+                  <Form.Control type="text"
+                    name="blocked"
+                    placeholder="Enter blocked"
+                    value={fields.blocked}
+                    onChange={handleFieldChange} />
+                </Form.Group>
               </Form.Row>
               <hr />
               <Button variant="primary mr-2" type="submit">

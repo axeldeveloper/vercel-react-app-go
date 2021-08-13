@@ -30,7 +30,7 @@ const App = () => {
               <Link to="/customer"><span className="fa fa-home"></span>Customer</Link>
             </li>
             <li>
-              <Link to="/product"><span className="fa fa-home"></span>Product</Link>
+              <Link to="/barber"><span className="fa fa-home"></span>Barbers</Link>
             </li>
             <li>
             <Link to="/product"><span className="fa fa-home"></span>Product</Link>
