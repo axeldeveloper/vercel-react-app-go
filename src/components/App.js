@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Home from "./Home";
+import Barber from "./barber/Barber";
+import Customer from "./customer/Customer";
+import Product from "./product/Product";
 import NotFound from './404';
+import OrderSales from './OrderSales';
 
 const App = () => {
   const[toggled,setToggled] = useState(false);
@@ -12,7 +16,8 @@ const App = () => {
   return (
     <div className="wrapper d-flex align-items-stretch">
       <Router>
-        <nav id="sidebar" className={buttonClass}>        
+        <nav id="sidebar" className={buttonClass}>
+          
           <h1>
             <Link to="/" className="logo">S.</Link>
           </h1>
@@ -46,8 +51,7 @@ const App = () => {
             </p>
           </div>
         </nav>
-
-       
+     
          <div id="content" className="p-4 p-md-5">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -72,14 +76,16 @@ const App = () => {
                   </Nav>             
                 </Navbar.Collapse>
             </div>
-          </nav>
-          
-         
+          </nav>     
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/barber" component={Barber} />
+            <Route exact path="/customer" component={() => <Customer greeting='customer' />} />
+            <Route exact path="/product" component={() => <Product greeting='roduto' />} />
+            <Route exact path="/ordersale" component={OrderSales} />
             <Route component={NotFound} />
           </Switch>
-        </div>  
+        </div>
       </Router>
       </div>
   );
