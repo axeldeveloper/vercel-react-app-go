@@ -126,7 +126,7 @@ const Product = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (fields.id == 0)
+    if (fields.id === 0)
       await handleCreate()
     else
       await handleUpdate()

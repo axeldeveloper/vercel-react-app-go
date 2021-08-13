@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'

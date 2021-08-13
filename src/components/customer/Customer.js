@@ -4,14 +4,12 @@ import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { useFormFields, getOptions } from "../lib/HooksLib";
+import { API_CUSTOMERS } from '../lib/AppConstants';
 
 const Customer = () => {
-
-  const API_URL = "http://barber-cg.herokuapp.com/api/v1/customers"
   const [title, setTitleModal] = useState("Add");
   const [customers, setCustomers] = useState([]);
   const [show, setShow] = useState(false);
@@ -67,12 +65,12 @@ const Customer = () => {
 
   const getURL = (id) => {
     if (id)
-      return `${API_URL}/${id}`;
-    return `${API_URL}`;
+      return `${API_CUSTOMERS}/${id}`;
+    return `${API_CUSTOMERS}`;
   }
 
   const loadData = async () => {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_CUSTOMERS);
     const data = await response.json();
     setCustomers(data);
   }
@@ -82,7 +80,7 @@ const Customer = () => {
     const payload = (({ id, ...o }) => o)(fields) // remove id;
     const requestOptions = getOptions(payload, 'POST');
     setShow(false)
-    persite(API_URL, requestOptions)
+    persite(API_CUSTOMERS, requestOptions)
       .then((data) => {
         alertModal("Customer Created!");
         loadData();
@@ -143,7 +141,7 @@ const Customer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (fields.id == 0)
+    if (fields.id === 0)
       await handleCreate()
     else
       await handleUpdate()

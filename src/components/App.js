@@ -33,13 +33,10 @@ const App = () => {
               <Link to="/product"><span className="fa fa-home"></span>Product</Link>
             </li>
             <li>
-              <a href="#"><span className="fa fa-cogs"></span> Services</a>
+            <Link to="/product"><span className="fa fa-home"></span>Product</Link>
             </li>
             <li>
-              <a href="#">
-                <span className="fa fa-paper-plane"></span> 
-                Contacts
-                </a>
+            <Link to="/product"><span className="fa fa-home"></span>Product</Link>
             </li>
           </ul>
           <div className="footer">
@@ -47,7 +44,7 @@ const App = () => {
               Copyright &copy;
               All rights reserved | This template is made with 
               <i className="icon-heart" aria-hidden="true"></i> by 
-              <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+              
             </p>
           </div>
         </nav>

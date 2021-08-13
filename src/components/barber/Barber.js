@@ -4,14 +4,14 @@ import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { useFormFields, getOptions } from "../lib/HooksLib";
 
+import { API_BARBERS } from '../lib/AppConstants';
+
 const Barber = () => {
     
-    const API_URL = "https://barber-cg.herokuapp.com/api/v1/barbers"
     const [title, setTitleModal] = useState("Add");
     const [barbers, setBarbers] = useState([]);
     const [show, setShow] = useState(false);
@@ -50,12 +50,12 @@ const Barber = () => {
 
     const getURL = (id) => {
         if (id)
-            return `${API_URL}/${id}`;
-        return `${API_URL}`;
+            return `${API_BARBERS}/${id}`;
+        return `${API_BARBERS}`;
     }
 
     const loadData = async () => {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_BARBERS);
         const data = await response.json();
         setBarbers(data);
     }
@@ -64,7 +64,7 @@ const Barber = () => {
         const payload = (({ id, ...o }) => o)(fields) // remove id;
         const requestOptions = getOptions(payload, 'POST');
         setShow(false)
-        persite(API_URL, requestOptions)
+        persite(API_BARBERS, requestOptions)
             .then((data) => {
                 alertModal("Barbers Created!")
             }).catch(error => {
@@ -75,7 +75,7 @@ const Barber = () => {
     const handleUpdate = async () => {
         const payload = fields;
         const requestOptions = getOptions(payload, 'PUT');
-        let url = getURL(payload.id);
+        let url = getURL(payload.id); 
         setShow(false);
         persite(url, requestOptions).then((data) => {
             alertModal("Barbers Updated!");
@@ -125,7 +125,7 @@ const Barber = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (fields.id == 0)
+        if (fields.id === 0)
             await handleCreate()
         else
             await handleUpdate()
