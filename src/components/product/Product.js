@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductLists from './ProductLists';
 import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
@@ -7,14 +7,21 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { useFormFields, getOptions } from "../lib/HooksLib";
+import { useFormFields } from "../lib/HooksLib";
+import { useGetProduct } from "../lib/useGetProduct";
+import { useCrudGeneric }  from "../lib/useCrudGeneric";
 
 const Product = () => {
 
-  const API_URL = "api/v1/products";
+
   const [title, setTitleModal] = useState("Add");
-  const [products, setProducts] = useState([]);
+
+  const { create, update, destroy } = useCrudGeneric();
+
+  const products = useGetProduct();
+
   const [show, setShow] = useState(false);
+
   const [modal, setAlertModal] = useState({
     show: false,
     title: '',
@@ -37,91 +44,40 @@ const Product = () => {
     estabelecimento_id: 1
   });
 
-  useEffect(() => { loadData() }, []);
-
   const setModalShow = () => {
     setTitleModal("Add Product");
     setShow(true)
   }
 
-  const getURL = (id) => {
-
-    let uri = `${window.location.protocol}//${window.location.hostname}`;
-    if (window.location.hostname === "localhost") {
-      uri+=':3000';
-      console.log(uri)
-    }
-    if (id)
-      return `${uri}/${API_URL}/${id}`;
-    return `${uri}/${API_URL}`;
-  }
-
-  const loadData = async () => {
-    const response = await fetch(getURL() );
-    const data = await response.json();
-    setProducts(data);
-  }
-
   const handleCreate = async () => {
     const payload = (({ id, ...o }) => o)(fields) // remove id;
-    const requestOptions = getOptions(payload, 'POST');
-    persite(API_URL, requestOptions).then((data) => {  
-      alertModal("Product Created!");     
+    setShow(false)
+    create(payload, 'products').then((resposnse) => {
+      console.log(resposnse);
+      alertModal("Customer Created!");
     }).catch(error => {
-      alertModal(error.message);
+      alertModal(error.message)
     });
-  }
-  
-  const handleUpdate = async () => {
-    const payload = fields;
-    const requestOptions = getOptions(payload, 'PUT');
-    let url = getURL(payload.id);
-    setShow(false);
-    persite(url, requestOptions).then((data) => {
-      alertModal("Product Updated!");
-    }).catch(error => {
-      alertModal(error.message);
-    });
-  }
-  
-  const handleDelete = async (item) => {
-    const requestOptions = getOptions({}, 'DELETE');
-    let url = getURL(item.id)
-    const response = persite(url, requestOptions);
-    response.then((data) => {
-      const items = products.filter(o => o.id !== item.id);
-      setProducts(items);
-      handleClose();
-    }).catch(error => {
-      alertModal(error.message); 
-    });
-    console.log(response);
   }
 
-  const persite = async (url, options) => {
-    const response = await fetch(url, options);
-    return await processResponse(response);  
+  const handleUpdate = async () => {
+    setShow(false);
+    update(fields, 'products').then((resposnse) => {
+      console.log(resposnse);
+      alertModal("Customer Updated!");
+    }).catch(error => {
+      alertModal(error.message);
+    });
   }
-  
-  const processResponse = async (response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    else { 
-      if (response.status === 404) 
-        return "Not found" ;    
-      
-        //if (response.status === 500) 
-        //  return "server error, try again" ;
-       
-      return response.json().then((data) => {
-        let error      = new Error(response.status);
-        error.message  = data.error || data.message ;
-        error.response = response;
-        error.status   = response.status;
-        throw error;
-      });   
-    }
+
+  const handleDelete = async (item) => {
+    destroy(item,'products').then((resposnse) => {
+      console.log(resposnse);
+      products.filter(o => o.id !== item.id);
+      handleClose();
+    }).catch(error => {
+      alertModal(error.message);
+    });
   }
 
   const handleSubmit = async (event) => {

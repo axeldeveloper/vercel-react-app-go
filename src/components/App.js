@@ -8,7 +8,7 @@ import Barber from "./barber/Barber";
 import Customer from "./customer/Customer";
 import Product from "./product/Product";
 import NotFound from './404';
-import OrderSales from './OrderSales';
+import OrderSales from './order/OrderSales';
 
 const App = () => {
   const[toggled,setToggled] = useState(false);

@@ -11,7 +11,8 @@ const ProductLists = (props) => {
     return ( 
       <Table  striped bordered hover>
         <thead>
-          <tr>
+          <tr>   
+            <th>Code</th>
             <th>Name</th>
             <th>Price</th>
             <th>Actions</th>
@@ -21,6 +22,7 @@ const ProductLists = (props) => {
           {props.products.length > 0 ? (
             props.products.map((item) => (
               <tr key={item.id}>
+                <td>{item.codigo}</td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td colSpan="2">

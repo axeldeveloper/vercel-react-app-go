@@ -2,12 +2,18 @@ import React from "react"
 import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-class OrderSales extends React.Component {
-  render () {
-    return (
-      <React.Fragment>
-        <Container >
-        <Button variant="secondary" style={{ float: 'right', margin: '20px' }}>Add a Employee</Button>
+
+const OrderSales = () => {
+
+  return (
+    <React.Fragment>
+      <Container >
+        <Button variant="primary" style={{ float: 'right', margin: '20px' }}>
+          <span className="fa fa-plus"></span>  Add Order
+        </Button>
+        
+        <h1 className="display-4"> List Ordered  </h1>
+        
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -36,12 +42,12 @@ class OrderSales extends React.Component {
             </tr>
           </tbody>
         </Table>
-        </Container>
+      </Container>
 
-        
-      </React.Fragment>
-    );
-  }
+
+    </React.Fragment>
+  );
+
 }
 
 export default OrderSales

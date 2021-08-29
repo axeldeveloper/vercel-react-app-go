@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CustomerLists from './CustomerLists';
 import PropTypes from "prop-types"
 import Container from 'react-bootstrap/Container'
@@ -6,12 +6,16 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { useFormFields, getOptions } from "../lib/HooksLib";
-import { API_CUSTOMERS } from '../lib/AppConstants';
+import { useFormFields } from "../lib/HooksLib";
+import { useGetCustomers } from '../lib/useGetCustomer';
+import { useCrudGeneric }  from "../lib/useCrudGeneric";
+
 
 const Customer = () => {
+  
   const [title, setTitleModal] = useState("Add");
-  const [customers, setCustomers] = useState([]);
+  const customers = useGetCustomers();
+  const { create, update, destroy } = useCrudGeneric();
   const [show, setShow] = useState(false);
   const [modal, setAlertModal] = useState({
     show: false,
@@ -39,8 +43,6 @@ const Customer = () => {
     tax_regime:""
   });
 
-  useEffect(() => { loadData() }, []);
-
   const setModalShow = () => {
     setTitleModal("Add Customer");
     setShow(true)
@@ -65,38 +67,21 @@ const Customer = () => {
     setShow(false)
   }
 
-  const getURL = (id) => {
-    if (id)
-      return `${API_CUSTOMERS}/${id}`;
-    return `${API_CUSTOMERS}`;
-  }
-
-  const loadData = async () => {
-    const response = await fetch(API_CUSTOMERS);
-    const data = await response.json();
-    setCustomers(data);
-  }
-  
-
   const handleCreate = async () => {
     const payload = (({ id, ...o }) => o)(fields) // remove id;
-    const requestOptions = getOptions(payload, 'POST');
     setShow(false)
-    persite(API_CUSTOMERS, requestOptions)
-      .then((data) => {
-        alertModal("Customer Created!");
-        loadData();
-      }).catch(error => {
-        alertModal(error.message)
-      });
+    create(payload, 'customers').then((resposnse) => {
+      console.log(resposnse);
+      alertModal("Customer Created!");
+    }).catch(error => {
+      alertModal(error.message)
+    });
   }
 
   const handleUpdate = async () => {
-    const payload = fields;
-    const requestOptions = getOptions(payload, 'PUT');
-    let url = getURL(payload.id);
     setShow(false);
-    persite(url, requestOptions).then((data) => {
+    update(fields, 'customers').then((resposnse) => {
+      console.log(resposnse);
       alertModal("Customer Updated!");
     }).catch(error => {
       alertModal(error.message);
@@ -104,42 +89,14 @@ const Customer = () => {
   }
 
   const handleDelete = async (item) => {
-    const requestOptions = getOptions({}, 'DELETE');
-    let url = getURL(item.id)
-    persite(url, requestOptions).then((data) => {
-      const items = customers.filter(o => o.id !== item.id);
-      setCustomers(items);
+    destroy(item,'customers').then((resposnse) => {
+      console.log(resposnse);
+      customers.filter(o => o.id !== item.id);
       handleClose();
     }).catch(error => {
       alertModal(error.message);
     });
   }
-
-  const persite = async (url, options) => {
-    const response = await fetch(url, options);
-    return await processResponse(response);
-  }
-
-  const processResponse = async (response) => {
-    if (response.ok) { return response.json(); }
-    else {
-
-      if (response.status === 404) return "Not found";
-      if (response.status === 422) return "Unprocessable Entity";
-      if (response.status === 401) return "Unauthorized";
-      if (response.status === 403) return "Forbidden";  
-      if (response.status === 500) return "server error, try again" ;
-
-      return response.json().then((data) => {
-        let error = new Error(response.status);
-        error.message = data.error || data.message;
-        error.response = response;
-        error.status = response.status;
-        throw error;
-      });
-    }
-  }
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();

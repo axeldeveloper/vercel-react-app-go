@@ -7,20 +7,15 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
-import { useFormFields, getOptions } from "../lib/HooksLib";
-import { API_CUSTOMERS } from '../lib/AppConstants';
-
+import { useFormFields } from "../lib/HooksLib";
 import { useGetCompany } from "../lib/useGetCompany";
-
-import  {useCrudCompany}  from "../lib/useCrudCompany";
-
-import Api from '../lib/Api';
+import { useCrudGeneric }  from "../lib/useCrudGeneric";
 
 const Company = () => {
   const [title, setTitleModal] = useState("Add");
   const customers = useGetCompany();
 
-  const { create, update, destroy } = useCrudCompany();
+  const { create, update, destroy } = useCrudGeneric();
 
   const [show, setShow] = useState(false);
   const [modal, setAlertModal] = useState({
@@ -67,9 +62,9 @@ const Company = () => {
   const handleCreate = async () => {
     const payload = (({ id, ...o }) => o)(fields) // remove id;
     setShow(false)
-    create(payload).then((resposnse) => {
+    create(payload, 'companies').then((resposnse) => {
       console.log(resposnse);
-      alertModal("Customer Created!");
+      alertModal("Companies Created!");
     }).catch(error => {
       alertModal(error.message)
     });
@@ -77,16 +72,16 @@ const Company = () => {
 
   const handleUpdate = async () => {
     setShow(false);
-    update(fields).then((resposnse) => {
+    update(fields, 'companies').then((resposnse) => {
       console.log(resposnse);
-      alertModal("Customer Updated!");
+      alertModal("Companies Updated!");
     }).catch(error => {
       alertModal(error.message);
     });
   }
 
   const handleDelete = async (item) => {
-    destroy(item).then((resposnse) => {
+    destroy(item, 'companies').then((resposnse) => {
       console.log(resposnse);
       customers.filter(o => o.id !== item.id);
       //setCustomers(items);
@@ -147,7 +142,6 @@ const Company = () => {
       item: option.item || {}
     });
   }
-
 
   return (
     <React.Fragment>
