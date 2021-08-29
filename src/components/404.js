@@ -1,7 +1,13 @@
 import React from "react";
 
+import Container from 'react-bootstrap/Container';
+
 export default () => (
-  <div className="wrapper">
-     <p> barber </p>
-  </div>
+  <React.Fragment>
+    <Container>
+        <h1 className="display-4"> Page not found  </h1>
+
+    </Container>
+  </React.Fragment>
+ 
 );

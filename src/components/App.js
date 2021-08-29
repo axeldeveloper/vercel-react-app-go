@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Home from "./Home";
+import Company from "./company/Company";
 import Barber from "./barber/Barber";
 import Customer from "./customer/Customer";
 import Product from "./product/Product";
@@ -27,7 +28,7 @@ const App = () => {
               <Link to="/"> <span className="fa fa-home"></span>Home</Link>
             </li>
             <li>
-              <Link to="/customer"><span className="fa fa-home"></span>Customer</Link>
+              <Link to="/company"><span className="fa fa-home"></span>Company</Link>
             </li>
             <li>
               <Link to="/barber"><span className="fa fa-home"></span>Barbers</Link>
@@ -36,7 +37,7 @@ const App = () => {
             <Link to="/product"><span className="fa fa-home"></span>Product</Link>
             </li>
             <li>
-            <Link to="/product"><span className="fa fa-home"></span>Product</Link>
+            <Link to="/customer"><span className="fa fa-home"></span>Customer</Link>
             </li>
           </ul>
           <div className="footer">
@@ -64,7 +65,7 @@ const App = () => {
                     <NavItem>   <Link className="nav-link"   to="/barber">Barber</Link> </NavItem> 
                     <NavItem>   <Link className="nav-link"   to="/product">Product</Link> </NavItem> 
                     <NavItem>   <Link className="nav-link"   to="/ordersale">Sales</Link> </NavItem> 
-                    <NavDropdown title="Link" id="navbarScrollingDropdown">
+                    <NavDropdown title="Setting" id="navbarScrollingDropdown">
                         <NavDropdown.Item href="/api/swagger">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
                         <NavDropdown.Divider />
@@ -76,6 +77,7 @@ const App = () => {
           </nav>     
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/company" component={Company} />
             <Route exact path="/barber" component={Barber} />
             <Route exact path="/customer" component={() => <Customer greeting='customer' />} />
             <Route exact path="/product" component={() => <Product greeting='roduto' />} />
