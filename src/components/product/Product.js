@@ -202,26 +202,123 @@ const Product = () => {
 
               <Row>
                 <Col>
-                  <Form.Group as={Col} controlId="codigo">
+                  <Form.Group as={Col} controlId="code">
                     <Form.Label>Code</Form.Label>
                     <Form.Control type="text"
-                      name="codigo"
+                      name="code"
                       placeholder="Enter numero"
-                      value={fields.codigo}
+                      value={fields.code}
                       onChange={handleFieldChange} />
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group as={Col} controlId="codigo_ean">
+                  <Form.Group as={Col} controlId="barcode">
                     <Form.Label>EAN</Form.Label>
                     <Form.Control type="text"
-                      name="codigo_ean"
+                      name="barcode"
                       placeholder="Enter ean"
-                      value={fields.codigo_ean}
+                      value={fields.barcode}
                       onChange={handleFieldChange} />
                   </Form.Group>
                 </Col>
               </Row>
+
+              <Row>
+                <Col>
+                  <Form.Group as={Col} controlId="classification">
+                    <Form.Label>Classification</Form.Label>
+                    <Form.Control type="text"
+                      name="classification"
+                      placeholder="Enter numero"
+                      value={fields.classification}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group as={Col} controlId="valorization">
+                    <Form.Label>Valorization</Form.Label>
+                    <Form.Control type="text"
+                      name="valorization"
+                      placeholder="Enter valorization"
+                      value={fields.valorization}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+
+              <Row>
+                <Col>
+                  <Form.Group as={Col} controlId="gross_weight">
+                    <Form.Label>gross_weight</Form.Label>
+                    <Form.Control type="text"
+                      name="gross_weight"
+                      placeholder="Enter gross_weight"
+                      value={fields.gross_weight}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group as={Col} controlId="net_weight">
+                    <Form.Label>net_weight</Form.Label>
+                    <Form.Control type="text"
+                      name="net_weight"
+                      placeholder="Enter net_weight"
+                      value={fields.net_weight}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+
+              <Row>
+                <Col>
+                  <Form.Group as={Col} controlId="height">
+                    <Form.Label>height</Form.Label>
+                    <Form.Control type="text"
+                      name="height"
+                      placeholder="Enter height"
+                      value={fields.height}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group as={Col} controlId="width">
+                    <Form.Label>width</Form.Label>
+                    <Form.Control type="text"
+                      name="width"
+                      placeholder="Enter width"
+                      value={fields.width}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+              </Row>
+              
+              <Row>
+                <Col>
+                  <Form.Group as={Col} controlId="purchase_cost">
+                    <Form.Label>purchase_cost</Form.Label>
+                    <Form.Control type="text"
+                      name="purchase_cost"
+                      placeholder="Enter purchase_cost"
+                      value={fields.purchase_cost}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group as={Col} controlId="sale_value">
+                    <Form.Label>sale_value</Form.Label>
+                    <Form.Control type="text"
+                      name="sale_value"
+                      placeholder="Enter sale_value"
+                      value={fields.sale_value}
+                      onChange={handleFieldChange} />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+
+
               <hr />
               <Button variant="primary" type="submit">
                 <span className="fa fa-check"></span>  Save

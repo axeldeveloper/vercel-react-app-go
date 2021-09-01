@@ -22,7 +22,7 @@ const ProductLists = (props) => {
           {props.products.length > 0 ? (
             props.products.map((item) => (
               <tr key={item.id}>
-                <td>{item.codigo}</td>
+                <td>{item.code}</td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td colSpan="2">
