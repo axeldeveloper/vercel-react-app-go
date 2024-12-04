@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
+//import Card from 'react-bootstrap/Card'
+import { Card, Row, Col } from 'react-bootstrap';
+///import CardDeck from 'react-bootstrap/CardDeck'
+
 import Button from 'react-bootstrap/Button'
 
 const Home = () => {
@@ -14,7 +16,8 @@ const Home = () => {
   return (
     <Container>
       <h1>{domain}</h1>
-      <CardDeck>
+      <Row>
+      <Col md={3}>
         <Card>
           <Card.Img variant="top" src="" />
           <Card.Body>
@@ -57,7 +60,8 @@ const Home = () => {
             <Button variant="primary">Go somewhere</Button>
           </Card.Footer>
         </Card>
-      </CardDeck>
+        </Col>
+      </Row>
     </Container>
 
   );

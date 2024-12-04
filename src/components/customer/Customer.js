@@ -12,10 +12,13 @@ import { useCrudGeneric }  from "../lib/useCrudGeneric";
 
 
 const Customer = () => {
-  
+
   const [title, setTitleModal] = useState("Add");
+
   const customers = useGetCustomers();
+
   const { create, update, destroy } = useCrudGeneric();
+
   const [show, setShow] = useState(false);
   const [modal, setAlertModal] = useState({
     show: false,
@@ -218,7 +221,7 @@ const Customer = () => {
                     placeholder="Enter im"
                     value={fields.im}
                     onChange={handleFieldChange} />
-                </Form.Group>      
+                </Form.Group>
               </Form.Row>
 
               <Form.Row>
@@ -244,7 +247,7 @@ const Customer = () => {
                     onChange={handleFieldChange} />
                 </Form.Group>
               </Form.Row>
-              
+
               <Form.Row>
                 <Form.Group as={Col} controlId="birth_date">
                   <Form.Label>Nascimento</Form.Label>
@@ -264,7 +267,7 @@ const Customer = () => {
                 </Form.Group>
               </Form.Row>
 
-              <Form.Row>           
+              <Form.Row>
                 <Form.Group as={Col} controlId="blocked">
                   <Form.Label>Ativo</Form.Label>
                   <Form.Control type="text"
